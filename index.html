@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Animaciones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="./img/favicon/escudo.png" type="image/x-icon" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <title>Inicio | Los Andes Store</title>
+</head>
+
+<body>
+  <header>
+    <div class="navbar-top">
+      <div class="logo">
+        <a href="/"><img src="./img/logo.png" alt="Los Andes Logo" /></a>
+      </div>
+      <div class="navbar-tools">
+        <div class="carrito-header" id="carrito-icono">
+          <img src="./img/icons/carrito.png" />
+          <span id="carrito-contador"></span>
+          <aside id="carrito-panel">
+            <h3>Tu Carrito</h3>
+            <button id="cerrar-carrito">X</button>
+            <div id="carrito-items"></div>
+            <p id="carrito-total"></p>
+            <button id="vaciar-carrito">Terminar Compra</button>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <div class="navbar-bottom">
+      <nav class="navbar-menu">
+        <ul>
+          <li><a href="#">
+              <h2>INICIO</h2>
+            </a></li>
+          <li><a href="#">
+              <h2>CAMISETAS</h2>
+            </a></li>
+          <li><a href="#">
+              <h2>ENTRENAMIENTO</h2>
+            </a></li>
+          <li><a href="#">
+              <h2>BUZOS</h2>
+            </a></li>
+          <li><a href="#">
+              <h2>ACCESORIOS</h2>
+            </a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="productos">
+      <h2>INDUMENTARIA 2025</h2>
+      <div class="contenedor-productos" id="contenedor-indumentaria"></div>
+    </section>
+
+    <section class="cta-banner">
+      <h2 data-aos="fade-down">VESTÍ LA PASIÓN</h2>
+      <h1>MILRAYITAS</h1>
+    </section>
+
+    <section class="seccion-final">
+      <div class="contenido-final">
+        <h2>DE PIEL A PIEL</h2>
+        <p>Llevate la camiseta del partido a tu casa</p>
+        <a href="https://mpago.la/tu-link" target="_blank"><button>¡La quiero!</button></a>
+      </div>
+    </section>
+
+    <section class="seccion-club">
+      <div class="degrade-texto">
+        <h2><small>DE</small>LOMAS<br /><small>YO SOY</small></h2>
+      </div>
+      <div class="cards">
+        <a href="camisetas.html" class="card zoom-bg fondo-camisetas">
+          <h3>CAMISETAS</h3>
+        </a>
+        <a href="entrenamiento.html" class="card zoom-bg fondo-entrenamiento">
+          <h3>ENTRENAMIENTO</h3>
+        </a>
+        <a href="merch.html" class="card zoom-bg fondo-buzos">
+          <h3>BUZOS</h3>
+        </a>
+        <a href="deco.html" class="card zoom-bg fondo-deco">
+          <h3>ACCESORIOS</h3>
+        </a>
+      </div>
+    </section>
+
+    <section class="seccion-identidad">
+      <div class="nombre-equipo">
+        <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="10" data-aos-offset="0">
+          CLUB ATLÉTICO LOS ANDES
+        </h2>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-losandes">
+    <div class="footer-container" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="20"
+      data-aos-offset="0">
+      <div class="footer-col">
+        <img src="./img/logo.png" alt="Los Andes Store" class="footer-logo" />
+        <h2>Novedades</h2>
+
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Ingresá tu e-mail" />
+          <button type="submit">→</button>
+        </form>
+      </div>
+
+      <div class="footer-col">
+        <h2>Información</h2>
+        <ul>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="#">Envíos y seguimiento</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Contacto</h2>
+        <p>
+          <a href="https://www.google.com/maps/search/?api=1&query=Av.+Santa+Fe+159,+Lomas+de+Zamora" target="_blank"
+            class="contact-link">
+            <img src="./img/icons/direccion.png" alt="Ubicación" />
+            Av. Santa Fe 159, Lomas de Zamora
+          </a>
+        </p>
+
+        <p>
+          <a href="https://wa.me/5491125923691" target="_blank" class="contact-link">
+            <img src="./img/icons/whatsapp.png" alt="WhatsApp" />
+            +54 9 11 2592-3691
+          </a>
+        </p>
+
+        <p>
+          <a href="mailto:tiendalosandesoficial@gmail.com" class="contact-link">
+            <img src="./img/icons/mail.png" alt="Correo" />
+            tiendalosandesoficial@gmail.com
+          </a>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h2>Seguinos</h2>
+        <div class="footer-social">
+          <a href="#"><img src="./img/icons/facebook.png" alt="Facebook" /></a>
+          <a href="#"><img src="./img/icons/instagram.png" alt="Instagram" /></a>
+          <a href="#"><img src="./img/icons/x.png" alt="Twitter" /></a>
+          <a href="#"><img src="./img/icons/youtube.png" alt="YouTube" /></a>
+          <a href="#"><img src="./img/icons/tiktok.png" alt="TikTok" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Club Atlético Los Andes - Tienda Oficial | Desarrollado por Leandro Cruz</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script> AOS.init({ duration: 800 }); </script>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
