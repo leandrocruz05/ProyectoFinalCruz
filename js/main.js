@@ -39,6 +39,8 @@ const MostrarProductos = (productos = indumentaria) => {
             </div> 
         `
     })
+    contenedorIndumentaria.style.display = 'flex'
+    AgregarAlCarrito()
 }
 
 // Contador flotante carrito
