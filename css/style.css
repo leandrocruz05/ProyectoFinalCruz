@@ -267,6 +267,27 @@ body {
     text-align: center;
 }
 
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #db0101;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 30px auto;
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .contenedor-productos {
     display: flex;
     flex-wrap: wrap;
@@ -483,19 +504,23 @@ body {
 }
 
 .card.zoom-bg.fondo-camisetas::before {
-    background-image: url('../img/titulos/camisetas.jpg');
+    background-image: url('https://i.imgur.com/07yvLsM.jpeg');
+    /*Camisetas*/
 }
 
 .card.zoom-bg.fondo-entrenamiento::before {
-    background-image: url('../img/titulos/entrenamiento.jpg');
+    background-image: url('https://i.imgur.com/eUWEq7r.jpeg');
+    /*Entrenamiento*/
 }
 
 .card.zoom-bg.fondo-buzos::before {
-    background-image: url('../img/titulos/buzos.jpg');
+    background-image: url('https://i.imgur.com/P8dlpC3.png');
+    /*Buzos*/
 }
 
 .card.zoom-bg.fondo-deco::before {
-    background-image: url('../img/titulos/deco.jpg');
+    background-image: url('https://i.imgur.com/XESqtuy.jpeg');
+    /*Accesorios*/
 }
 
 .card.zoom-bg:hover::before {

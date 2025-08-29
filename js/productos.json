@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "nombre": "Camiseta titular",
+        "tipo": "camiseta",
+        "descripcion": "",
+        "precio": 70000,
+        "imagen": "https://i.imgur.com/wUCka2D.jpeg",
+        "alt": "Camiseta titular Los Andes 2025"
+    },
+    {
+        "id": 2,
+        "nombre": "Camiseta LAtidos",
+        "tipo": "camiseta",
+        "descripcion": "",
+        "precio": 70000,
+        "imagen": "https://i.imgur.com/b9d7F7c.jpeg",
+        "alt": "Camiseta LAtidos Los Andes 2025"
+    },
+    {
+        "id": 3,
+        "nombre": "Camiseta Alternativa II",
+        "tipo": "camiseta",
+        "descripcion": "",
+        "precio": 65000,
+        "imagen": "https://i.imgur.com/hoQLn7t.jpeg",
+        "alt": "Camiseta Alternativa II Los Andes 2025"
+    },
+    {
+        "id": 4,
+        "nombre": "Camiseta Pura Sangre",
+        "tipo": "camiseta",
+        "descripcion": "",
+        "precio": 54000,
+        "imagen": "https://i.imgur.com/bNaRAs7.jpeg",
+        "alt": "Camiseta Pura Sangre Los Andes 2025"
+    },
+    {
+        "id": 5,
+        "nombre": "Buzo Canguro c/ friza",
+        "tipo": "buzo",
+        "descripcion": "",
+        "precio": 59000,
+        "imagen": "https://i.imgur.com/hAye3NO.jpeg",
+        "alt": "Buzo Canguro con friza Los Andes 2025"
+    },
+    {
+        "id": 6,
+        "nombre": "Buzo Condór II Azul",
+        "tipo": "buzo",
+        "descripcion": "",
+        "precio": 59000,
+        "imagen": "https://i.imgur.com/hwU5MiB.png",
+        "alt": "Buzo Condór II azul Los Andes 2025"
+    },
+    {
+        "id": 7,
+        "nombre": "Buzo Condor II Rojo",
+        "tipo": "buzo",
+        "descripcion": "",
+        "precio": 59000,
+        "imagen": "https://i.imgur.com/wGRU4hV.png",
+        "alt": "Buzo Condor II rojo Los Andes 2025"
+    },
+    {
+        "id": 8,
+        "nombre": "Camperon impermeable",
+        "tipo": "camperon",
+        "descripcion": "",
+        "precio": 145000,
+        "imagen": "https://i.imgur.com/B8a1yLi.png",
+        "alt": "Camperon impermeable Los Andes 2025"
+    }
+]
