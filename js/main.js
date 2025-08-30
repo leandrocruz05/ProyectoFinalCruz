@@ -34,7 +34,7 @@ const MostrarProductos = (productos = indumentaria) => {
                     <h2>${producto.nombre}</h2>
                     <p>${producto.descripcion}</p>
                     <span>$${producto.precio}</span>
-                    <button data-id="${producto.id}">¡La quiero!</button>
+                    <button class="btn-la-quiero" data-id="${producto.id}">¡La quiero!</button>
                 </div>
             </div> 
         `
@@ -106,7 +106,7 @@ const MostrarCarrito = () => {
 
 // Agrego productos al carrito
 const AgregarAlCarrito = () => {
-    const botonAgregar = document.querySelectorAll('.info-producto button')
+    const botonAgregar = document.querySelectorAll('.btn-la-quiero')
     botonAgregar.forEach((boton) => {
         boton.addEventListener('click', (evento) => {
             let idProducto = parseInt(evento.target.closest('.card-producto').id)
@@ -114,7 +114,6 @@ const AgregarAlCarrito = () => {
 
             // Verifico si el producto ya esta en el carrito
             const productoEnCarrito = carrito.find(item => item.id === idProducto)
-
             if (productoEnCarrito) {
                 productoEnCarrito.cantidad++
             } else {
@@ -123,6 +122,14 @@ const AgregarAlCarrito = () => {
             guardarCarrito()
             actualizarContador()
             MostrarCarrito()
+            Toastify ({ // Agrego mensaje al comprar
+                text: `🛒¡Se agrego ${producto.nombre} al carrito!`,
+                duration: 2500,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "red",
+                stopOnFocus:true
+            }).showToast();
         })
     })
 }
