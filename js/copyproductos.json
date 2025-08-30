@@ -1,11 +1,11 @@
 [
     {
         "id": 1,
-        "nombre": "Camiseta Titular",
+        "nombre": "Camiseta titular",
         "tipo": "camiseta",
         "descripcion": "",
         "precio": 70000,
-        "imagen": "../img/productos/camisetatitular.jpeg",
+        "imagen": "https://i.imgur.com/wUCka2D.jpeg",
         "alt": "Camiseta titular Los Andes 2025"
     },
     {
@@ -14,7 +14,7 @@
         "tipo": "camiseta",
         "descripcion": "",
         "precio": 70000,
-        "imagen": "../img/productos/camisetalatidos.jpeg",
+        "imagen": "https://i.imgur.com/b9d7F7c.jpeg",
         "alt": "Camiseta LAtidos Los Andes 2025"
     },
     {
@@ -23,7 +23,7 @@
         "tipo": "camiseta",
         "descripcion": "",
         "precio": 65000,
-        "imagen": "../img/productos/camisetaalternativa.jpeg",
+        "imagen": "https://i.imgur.com/hoQLn7t.jpeg",
         "alt": "Camiseta Alternativa II Los Andes 2025"
     },
     {
@@ -32,7 +32,7 @@
         "tipo": "camiseta",
         "descripcion": "",
         "precio": 54000,
-        "imagen": "../img/productos/camisetapurasangre.jpeg",
+        "imagen": "https://i.imgur.com/bNaRAs7.jpeg",
         "alt": "Camiseta Pura Sangre Los Andes 2025"
     },
     {
@@ -41,7 +41,7 @@
         "tipo": "buzo",
         "descripcion": "",
         "precio": 59000,
-        "imagen": "../img/productos/buzocangurofriza.jpeg",
+        "imagen": "https://i.imgur.com/hAye3NO.jpeg",
         "alt": "Buzo Canguro con friza Los Andes 2025"
     },
     {
@@ -50,7 +50,7 @@
         "tipo": "buzo",
         "descripcion": "",
         "precio": 59000,
-        "imagen": "../img/productos/buzocondorazul.png",
+        "imagen": "https://i.imgur.com/hwU5MiB.png",
         "alt": "Buzo Condór II azul Los Andes 2025"
     },
     {
@@ -59,7 +59,7 @@
         "tipo": "buzo",
         "descripcion": "",
         "precio": 59000,
-        "imagen": "../img/productos/buzocondorrojo.png",
+        "imagen": "https://i.imgur.com/wGRU4hV.png",
         "alt": "Buzo Condor II rojo Los Andes 2025"
     },
     {
@@ -68,7 +68,7 @@
         "tipo": "camperon",
         "descripcion": "",
         "precio": 145000,
-        "imagen": "../img/productos/camperon.png",
+        "imagen": "https://i.imgur.com/B8a1yLi.png",
         "alt": "Camperon impermeable Los Andes 2025"
     }
 ]
