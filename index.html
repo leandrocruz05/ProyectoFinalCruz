@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <title>Inicio | Los Andes Store</title>
 </head>
 
@@ -39,7 +42,10 @@
             <button id="cerrar-carrito">X</button>
             <div id="carrito-items"></div>
             <p id="carrito-total"></p>
-            <button id="vaciar-carrito">Terminar Compra</button>
+            <div class="carrito-acciones">
+              <button id="finalizar-compra">Terminar Compra</button>
+              <button id="vaciar-carrito">🗑️</button>
+            </div>
           </aside>
         </div>
       </div>

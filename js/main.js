@@ -4,6 +4,7 @@ const carritoContador = document.getElementById('carrito-contador')
 const carritoPanel = document.getElementById('carrito-panel')
 const carritoItems = document.getElementById('carrito-items')
 const carritoTotal = document.getElementById('carrito-total')
+const finalizarCompraBtn = document.getElementById('finalizar-compra')
 const vaciarCarritoBtn = document.getElementById('vaciar-carrito')
 const loaderIndumentaria = document.getElementById('loader-indumentaria')
 
@@ -122,13 +123,13 @@ const AgregarAlCarrito = () => {
             guardarCarrito()
             actualizarContador()
             MostrarCarrito()
-            Toastify ({ // Agrego mensaje al comprar
+            Toastify({ // Agrego mensaje al comprar
                 text: `🛒¡Se agrego ${producto.nombre} al carrito!`,
                 duration: 2500,
                 gravity: "top",
                 position: "center",
                 backgroundColor: "red",
-                stopOnFocus:true
+                stopOnFocus: true
             }).showToast();
         })
     })
@@ -148,14 +149,106 @@ const EliminarDelCarrito = () => {
     })
 }
 
-// Terminar compra funciona como vaciar el carrito (hoy)
+// Vaciar el carrito
 vaciarCarritoBtn.addEventListener('click', () => {
     carrito = []
     guardarCarrito()
     actualizarContador()
     MostrarCarrito()
-    //alert('¡Gracias por tu compra!')
+    MostrarProductos()
 })
+
+// Terminar compra
+finalizarCompraBtn.addEventListener('click', () => {
+    if (carrito.length === 0) {
+        Swal.fire({
+            title: 'Carrito vacío',
+            text: 'Agrega productos antes de comprar.',
+            icon: 'info'
+        })
+        return
+    }
+    let resumenCompra = carrito.map(item =>
+        `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`
+    )
+    let totalCompra = calculoTotal()
+    Swal.fire({
+        title: 'Resumen de tu compra',
+        html: `<div>
+                    ${resumenCompra}
+                </div>
+                <br><hr><br>
+                <strong>Total: $${totalCompra}</strong>
+              `,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar compra',
+        cancelButtonText: 'Cancelar'
+    }).then((resultado) => {
+        if (resultado.isConfirmed) {
+            formularioFinCompra()
+        }
+    })
+})
+
+// Formulario de compra
+const formularioFinCompra = () => {
+    swal.fire({
+        title: 'Formulario de compra',
+        html: `
+            <form id="formulario-compra">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+
+                <label for="number">Telefono:</label>
+                <input type="tel" id="number" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </form>
+        `,
+        confirmButtonText: 'Finalizar compra',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            try {
+                // Obtener los valores del formulario
+                const nombre = document.getElementById('nombre').value
+                const telefono = document.getElementById('number').value
+                const email = document.getElementById('email').value
+
+                // Valido que los campos básicos no estén vacíos
+                if (nombre && telefono && email) {
+                    Swal.fire({
+                        title: '¡Compra realizada!',
+                        text: `Gracias ${nombre} por tu compra!`,
+                        icon: 'success',
+                        html: ` Te enviaremos un código de compra a: <strong>${email}</strong>
+                                <br>
+                                Ante cualquier inconveniente, nos contactaremos al <strong>${telefono}</strong>`,
+                    })
+                    // Vacío el carrito
+                    carrito = []
+                    guardarCarrito()
+                    actualizarContador()
+                    MostrarCarrito()
+                    MostrarProductos()
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Por favor completa todos los campos.',
+                        icon: 'error'
+                    })
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error inesperado',
+                    text: 'Ocurrió un error al procesar el formulario. Intenta nuevamente.',
+                    icon: 'error'
+                })
+            }
+        }
+    })
+}
 
 // Mostrar carrito
 carritoIcono.addEventListener('click', () => {
