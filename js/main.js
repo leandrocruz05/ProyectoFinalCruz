@@ -80,31 +80,6 @@ const calculoTotal = () => {
     return total
 }
 
-// Muestro productos al carrito
-const MostrarCarrito = () => {
-    carritoItems.innerHTML = ''
-
-    // Si esta vacio lo seteo desde aca
-    if (carrito.length === 0) {
-        carritoItems.innerHTML = '<p>El carrito está vacío</p>'
-        carritoTotal.textContent = 'Total: $0'
-        return
-    }
-
-    carrito.forEach((item) => {
-        carritoItems.innerHTML += `
-            <div class="carrito-modelo">
-                <p>${item.nombre} x${item.cantidad}</p>
-                <p>$${(item.precio * item.cantidad)}</p>
-                <button class="eliminar-item" data-id="${item.id}">X</button>
-            </div>
-            `
-    })
-
-    carritoTotal.innerHTML = `<p class="total"> Total: $${calculoTotal()}</p>`
-    EliminarDelCarrito()
-}
-
 // Agrego productos al carrito
 const AgregarAlCarrito = () => {
     const botonAgregar = document.querySelectorAll('.btn-la-quiero')
@@ -135,9 +110,71 @@ const AgregarAlCarrito = () => {
     })
 }
 
+// Accion de modificar la cantidad desde + - en carrito
+const modificarCantidad = () => {
+    document.querySelectorAll('.boton-cantidad').forEach(boton => {
+        boton.addEventListener('click', (evento) => {
+            let idprod = parseInt(evento.target.dataset.id)
+            let accion = evento.target.dataset.accion
+            let producto = carrito.find(item => item.id === idprod)
+            
+            if (producto) {
+                switch (accion) {
+                    case 'sumar':
+                        producto.cantidad++
+                        break
+                    case 'restar':
+                        producto.cantidad--
+                        if (producto.cantidad === 0) {
+                            carrito = carrito.filter(item => item.id !== idprod)
+                        }
+                        break
+                }
+                guardarCarrito()
+                actualizarContador()
+                MostrarCarrito()
+            }
+        })
+    })
+}
+
+// Muestro productos al carrito
+const MostrarCarrito = () => {
+    carritoItems.innerHTML = ''
+
+    // Si esta vacio lo seteo desde aca
+    if (carrito.length === 0) {
+        carritoItems.innerHTML = '<p>El carrito está vacío</p>'
+        carritoTotal.textContent = 'Total: $0'
+        return
+    }
+
+    carrito.forEach((item) => {
+        carritoItems.innerHTML += `
+            <div class="carrito-modelo">
+                <div class="carrito-header">
+                    <span class="item-titulo">${item.nombre}</span>
+                    <button class="item-eliminar" data-id="${item.id}"></button>
+                </div>
+                <div class="carrito-info">
+                    <div class="cantidad-carrito">
+                        <button class="boton-cantidad" data-id="${item.id}" data-accion="restar">-</button>
+                        <span>${item.cantidad}</span>
+                        <button class="boton-cantidad" data-id="${item.id}" data-accion="sumar">+</button>
+                    </div>
+                    <span class="item-precio">$${(item.precio * item.cantidad)}</span>
+                </div>
+            </div>
+            `
+    })
+    carritoTotal.innerHTML = `<p class="total"> Total: $${calculoTotal()}</p>`
+    EliminarDelCarrito()
+    modificarCantidad()
+}
+
 // Elimino productos del carrito
 const EliminarDelCarrito = () => {
-    const botonEliminar = document.querySelectorAll('.eliminar-item')
+    const botonEliminar = document.querySelectorAll('.item-eliminar')
     botonEliminar.forEach((boton) => {
         boton.addEventListener('click', (evento) => {
             let idProducto = parseInt(evento.target.dataset.id)
