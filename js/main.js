@@ -112,6 +112,7 @@ contenedorIndumentaria.addEventListener('click', (evento) => {
         actualizarContador()
         mostrarCarrito()
         mostrarProductos()
+        filtrarProductos()
         Toastify({
             text: `🛒¡Se agrego ${producto.nombre} al carrito!`,
             duration: 2500,
@@ -145,6 +146,7 @@ contenedorIndumentaria.addEventListener('click', (evento) => {
             actualizarContador()
             mostrarCarrito()
             mostrarProductos()
+            filtrarProductos()
         }
     }
 })
@@ -172,6 +174,7 @@ carritoItems.addEventListener('click', (evento) => {
             actualizarContador()
             mostrarCarrito()
             mostrarProductos()
+            filtrarProductos()
         }
     }
 })
@@ -217,6 +220,7 @@ carritoItems.addEventListener('click', (evento) => {
         actualizarContador()
         mostrarCarrito()
         mostrarProductos()
+        filtrarProductos()
     }
 })
 
@@ -227,6 +231,7 @@ vaciarCarritoBtn.addEventListener('click', () => {
     actualizarContador()
     mostrarCarrito()
     mostrarProductos()
+    filtrarProductos()
 })
 
 // Terminar compra
@@ -240,7 +245,7 @@ finalizarCompraBtn.addEventListener('click', () => {
         return
     }
     let resumenCompra = carrito.map(item =>
-        `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString('es-AR')} `
+        `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString('es-AR')} <br>`).join(''
     )
     let totalCompra = calculoTotal()
     Swal.fire({
