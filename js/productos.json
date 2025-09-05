@@ -65,10 +65,82 @@
     {
         "id": 8,
         "nombre": "Camperon impermeable",
-        "tipo": "camperon",
+        "tipo": "buzo",
         "descripcion": "",
         "precio": 145000,
         "imagen": "../img/productos/camperon.png",
         "alt": "Camperon impermeable Los Andes 2025"
+    },
+    {
+        "id": 9,
+        "nombre": "Camiseta Titan Azul",
+        "tipo": "entrenamiento",
+        "descripcion": "",
+        "precio": 32000,
+        "imagen": "../img/productos/azulentrenamiento.jpg",
+        "alt": "Camiseta Titan Azul"
+    },
+    {
+        "id": 10,
+        "nombre": "Musculosa Dublin Azul",
+        "tipo": "entrenamiento",
+        "descripcion": "",
+        "precio": 32000,
+        "imagen": "../img/productos/musculosa.jpg",
+        "alt": "Musculosa Dublin Azul"
+    },
+    {
+        "id": 11,
+        "nombre": "Remera Striker Azul",
+        "tipo": "entrenamiento",
+        "descripcion": "",
+        "precio": 34000,
+        "imagen": "../img/productos/striker.jpg",
+        "alt": "Remera Striker Azul"
+    },
+    {
+        "id": 12,
+        "nombre": "Camiseta Titan Roja",
+        "tipo": "entrenamiento",
+        "descripcion": "",
+        "precio": 32000,
+        "imagen": "../img/productos/rojaentrenamiento.jpg",
+        "alt": "Camiseta Titan Roja"
+    },
+    {
+        "id": 13,
+        "nombre": "Imán Estadio",
+        "tipo": "accesorios",
+        "descripcion": "",
+        "precio": 6000,
+        "imagen": "../img/productos/iman.jpg",
+        "alt": "Imán Estadio"
+    },
+    {
+        "id": 14,
+        "nombre": "Billetera Escudo",
+        "tipo": "accesorios",
+        "descripcion": "",
+        "precio": 12000,
+        "imagen": "../img/productos/billetera.jpg",
+        "alt": "Billetera Escudo"
+    },
+    {
+        "id": 15,
+        "nombre": "Portallave Estadio",
+        "tipo": "accesorios",
+        "descripcion": "",
+        "precio": 20000,
+        "imagen": "../img/productos/portallaves.jpg",
+        "alt": "Portallave Estadio"
+    },
+    {
+        "id": 16,
+        "nombre": "Llavero cinta",
+        "tipo": "accesorios",
+        "descripcion": "",
+        "precio": 2000,
+        "imagen": "../img/productos/llavero.jpg",
+        "alt": "Llavero cinta"
     }
 ]

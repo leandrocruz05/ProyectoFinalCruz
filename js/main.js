@@ -7,6 +7,7 @@ const carritoTotal = document.getElementById('carrito-total')
 const finalizarCompraBtn = document.getElementById('finalizar-compra')
 const vaciarCarritoBtn = document.getElementById('vaciar-carrito')
 const loaderIndumentaria = document.getElementById('loader-indumentaria')
+const buscadorProductos = document.getElementById('buscador-productos')
 
 // Inicializar carrito
 let carrito = []
@@ -18,29 +19,43 @@ const mostrarLoader = () => {
     loaderIndumentaria.style.display = 'block'
     contenedorIndumentaria.style.display = 'none'
 }
+
 const ocultarLoader = () => {
     loaderIndumentaria.style.display = 'none'
     contenedorIndumentaria.style.display = 'flex'
 }
 
 // Muestro los productos del array
-const MostrarProductos = (productos = indumentaria) => {
+const mostrarProductos = (productos = indumentaria) => {
     contenedorIndumentaria.innerHTML = ''
     productos.forEach((producto) => {
+        const productoEnCarrito = carrito.find(item => item.id === producto.id)
+        let botonHTML = ''
+
+        if (productoEnCarrito) {
+            botonHTML = `<div class="cantidad-producto">
+                            <button class="boton-cantidad" data-id="${producto.id}" data-accion="restar">-</button>
+                            <span id="cantidad-${producto.id}">${productoEnCarrito.cantidad}</span>
+                            <button class="boton-cantidad" data-id="${producto.id}" data-accion="sumar">+</button>
+                        </div>`
+        } else {
+            botonHTML = `<button class="btn-la-quiero" data-id="${producto.id}">¡La quiero!</button>`
+        }
+
         contenedorIndumentaria.innerHTML += `
-            <div class="card-producto" id=${producto.id}>
-                <img src="${producto.imagen}" alt="${producto.nombre}">
-                <div class="info-producto">
-                    <h2>${producto.nombre}</h2>
-                    <p>${producto.descripcion}</p>
-                    <span>$${producto.precio.toLocaleString('es-AR')}</span>
-                    <button class="btn-la-quiero" data-id="${producto.id}">¡La quiero!</button>
-                </div>
-            </div> 
-        `
+                    <div class="card-producto" id=${producto.id}>
+                        <img src="${producto.imagen}" alt="${producto.nombre}">
+                            <div class="info-producto">
+                                <h2>${producto.nombre}</h2>
+                                <p>${producto.descripcion}</p>
+                                <span>$${producto.precio.toLocaleString('es-AR')}</span>
+                                <br>
+                                ${botonHTML}
+                            </div>
+                        </div>
+                `
     })
     contenedorIndumentaria.style.display = 'flex'
-    AgregarAlCarrito()
 }
 
 // Contador flotante carrito
@@ -80,66 +95,86 @@ const calculoTotal = () => {
 }
 
 // Agrego productos al carrito
-const AgregarAlCarrito = () => {
-    const botonAgregar = document.querySelectorAll('.btn-la-quiero')
-    botonAgregar.forEach((boton) => {
-        boton.addEventListener('click', (evento) => {
-            let idProducto = parseInt(evento.target.closest('.card-producto').id)
-            let producto = indumentaria.find(prod => prod.id === idProducto)
+contenedorIndumentaria.addEventListener('click', (evento) => {
+    if (evento.target.classList.contains('btn-la-quiero')) {
+        let idProducto = parseInt(evento.target.closest('.card-producto').id)
+        let producto = indumentariaOriginal.find(prod => prod.id === idProducto)
+        const productoEnCarrito = carrito.find(item => item.id === idProducto)
+        if (productoEnCarrito) {
+            productoEnCarrito.cantidad++
+        } else {
+            carrito.push({ ...producto, cantidad: 1 })
+        }
+        guardarCarrito()
+        actualizarContador()
+        mostrarCarrito()
+        mostrarProductos()
+        Toastify({
+            text: `🛒¡Se agrego ${producto.nombre} al carrito!`,
+            duration: 2500,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "red",
+            stopOnFocus: true
+        }).showToast();
+    }
+})
 
-            // Verifico si el producto ya esta en el carrito
-            const productoEnCarrito = carrito.find(item => item.id === idProducto)
-            if (productoEnCarrito) {
-                productoEnCarrito.cantidad++
-            } else {
-                carrito.push({ ...producto, cantidad: 1 })
+// Modificar la cantidad desde el carrito
+contenedorIndumentaria.addEventListener('click', (evento) => {
+    if (evento.target.classList.contains('boton-cantidad')) {
+        let idprod = parseInt(evento.target.dataset.id)
+        let accion = evento.target.dataset.accion
+        let producto = carrito.find(item => item.id === idprod)
+        if (producto) {
+            switch (accion) {
+                case 'sumar':
+                    producto.cantidad++
+                    break
+                case 'restar':
+                    producto.cantidad--
+                    if (producto.cantidad === 0) {
+                        carrito = carrito.filter(item => item.id !== idprod)
+                    }
+                    break
             }
             guardarCarrito()
             actualizarContador()
-            MostrarCarrito()
-            Toastify({ // Agrego mensaje al comprar
-                text: `🛒¡Se agrego ${producto.nombre} al carrito!`,
-                duration: 2500,
-                gravity: "top",
-                position: "center",
-                backgroundColor: "red",
-                stopOnFocus: true
-            }).showToast();
-        })
-    })
-}
+            mostrarCarrito()
+            mostrarProductos()
+        }
+    }
+})
 
-// Accion de modificar la cantidad desde + - en carrito
-const modificarCantidad = () => {
-    document.querySelectorAll('.boton-cantidad').forEach(boton => {
-        boton.addEventListener('click', (evento) => {
-            evento.stopPropagation()
-            let idprod = parseInt(evento.target.dataset.id)
-            let accion = evento.target.dataset.accion
-            let producto = carrito.find(item => item.id === idprod)
-
-            if (producto) {
-                switch (accion) {
-                    case 'sumar':
-                        producto.cantidad++
-                        break
-                    case 'restar':
-                        producto.cantidad--
-                        if (producto.cantidad === 0) {
-                            carrito = carrito.filter(item => item.id !== idprod)
-                        }
-                        break
-                }
-                guardarCarrito()
-                actualizarContador()
-                MostrarCarrito()
+// Modificar la cantidad desde los productos
+carritoItems.addEventListener('click', (evento) => {
+    evento.stopPropagation()
+    if (evento.target.classList.contains('boton-cantidad')) {
+        let idprod = parseInt(evento.target.dataset.id)
+        let accion = evento.target.dataset.accion
+        let producto = carrito.find(item => item.id === idprod)
+        if (producto) {
+            switch (accion) {
+                case 'sumar':
+                    producto.cantidad++
+                    break
+                case 'restar':
+                    producto.cantidad--
+                    if (producto.cantidad === 0) {
+                        carrito = carrito.filter(item => item.id !== idprod)
+                    }
+                    break
             }
-        })
-    })
-}
+            guardarCarrito()
+            actualizarContador()
+            mostrarCarrito()
+            mostrarProductos()
+        }
+    }
+})
 
 // Muestro productos al carrito
-const MostrarCarrito = () => {
+const mostrarCarrito = () => {
     carritoItems.innerHTML = ''
 
     // Si esta vacio lo seteo desde aca
@@ -164,36 +199,31 @@ const MostrarCarrito = () => {
                     </div>
                     <span class="item-precio">$${(item.precio * item.cantidad).toLocaleString('es-AR')}</span>
                 </div>
-            </div>
-            `
+            </div>`
     })
     carritoTotal.innerHTML = `<p class="total"> Total: $${calculoTotal().toLocaleString('es-AR')}</p>`
-    EliminarDelCarrito()
-    modificarCantidad()
 }
 
 // Elimino productos del carrito
-const EliminarDelCarrito = () => {
-    const botonEliminar = document.querySelectorAll('.item-eliminar')
-    botonEliminar.forEach((boton) => {
-        boton.addEventListener('click', (evento) => {
-            evento.stopPropagation()
-            let idProducto = parseInt(evento.target.dataset.id)
-            carrito = carrito.filter(item => item.id !== idProducto)
-            guardarCarrito()
-            actualizarContador()
-            MostrarCarrito()
-        })
-    })
-}
+carritoItems.addEventListener('click', (evento) => {
+    evento.stopPropagation()
+    if (evento.target.classList.contains('item-eliminar')) {
+        let idProducto = parseInt(evento.target.dataset.id)
+        carrito = carrito.filter(item => item.id !== idProducto)
+        guardarCarrito()
+        actualizarContador()
+        mostrarCarrito()
+        mostrarProductos()
+    }
+})
 
 // Vaciar el carrito
 vaciarCarritoBtn.addEventListener('click', () => {
     carrito = []
     guardarCarrito()
     actualizarContador()
-    MostrarCarrito()
-    MostrarProductos()
+    mostrarCarrito()
+    mostrarProductos()
 })
 
 // Terminar compra
@@ -207,17 +237,17 @@ finalizarCompraBtn.addEventListener('click', () => {
         return
     }
     let resumenCompra = carrito.map(item =>
-        `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`
+        `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad} `
     )
     let totalCompra = calculoTotal()
     Swal.fire({
         title: 'Resumen de tu compra',
         html: `<div>
-                    ${resumenCompra}
+    ${resumenCompra}
                 </div>
-                <br><hr><br>
-                <strong>Total: $${totalCompra}</strong>
-              `,
+    <br><hr><br>
+        <strong>Total: $${totalCompra}</strong>
+        `,
         icon: 'info',
         showCancelButton: true,
         confirmButtonText: 'Confirmar compra',
@@ -268,8 +298,8 @@ const formularioFinCompra = () => {
                     carrito = []
                     guardarCarrito()
                     actualizarContador()
-                    MostrarCarrito()
-                    MostrarProductos()
+                    mostrarCarrito()
+                    mostrarProductos()
                 } else {
                     Swal.fire({
                         title: 'Error',
@@ -288,11 +318,21 @@ const formularioFinCompra = () => {
     })
 }
 
+function filtrarProductos() {
+    let busqueda = buscadorProductos.value.trim().toLowerCase()
+
+    let productosFiltrados = indumentariaOriginal.filter(producto => {
+        return producto.nombre.toLowerCase().includes(busqueda)
+    })
+
+    mostrarProductos(productosFiltrados)
+}
+
 // Mostrar carrito
 carritoIcono.addEventListener('click', () => {
     carritoPanel.classList.toggle('abre')
     actualizarContador()
-    MostrarCarrito()
+    mostrarCarrito()
 })
 
 // Cierra el carrito desde el botón
@@ -307,6 +347,8 @@ document.addEventListener('click', (evento) => {
     }
 })
 
+buscadorProductos.addEventListener('input', filtrarProductos)
+
 // Renderizar productos al cargar DOM
 document.addEventListener('DOMContentLoaded', () => {
     cargarCarrito()
@@ -317,9 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
             indumentaria = data
             indumentariaOriginal = data
             ocultarLoader()
-            MostrarProductos()
+            mostrarProductos()
             actualizarContador()
-            MostrarCarrito()
+            mostrarCarrito()
         })
         .catch(() => {
             loaderIndumentaria.innerHTML = '' //<p>Error al cargar los productos</p>
