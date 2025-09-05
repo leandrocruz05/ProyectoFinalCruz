@@ -8,11 +8,13 @@ const finalizarCompraBtn = document.getElementById('finalizar-compra')
 const vaciarCarritoBtn = document.getElementById('vaciar-carrito')
 const loaderIndumentaria = document.getElementById('loader-indumentaria')
 const buscadorProductos = document.getElementById('buscador-productos')
+const ordenPrecio = document.getElementById('orden-precio')
 
 // Inicializar carrito
 let carrito = []
 let indumentaria = []
 let indumentariaOriginal = []
+let tipoSeleccionado = ""
 
 // Loader (cargando..)
 const mostrarLoader = () => {
@@ -46,7 +48,7 @@ const mostrarProductos = (productos = indumentaria) => {
                     <div class="card-producto" id=${producto.id}>
                         <img src="${producto.imagen}" alt="${producto.nombre}">
                             <div class="info-producto">
-                                <h2>${producto.nombre}</h2>
+                                <h3>${producto.nombre}</h3>
                                 <p>${producto.descripcion}</p>
                                 <span>$${producto.precio.toLocaleString('es-AR')}</span>
                                 <br>
@@ -96,6 +98,7 @@ const calculoTotal = () => {
 
 // Agrego productos al carrito
 contenedorIndumentaria.addEventListener('click', (evento) => {
+    evento.stopPropagation()
     if (evento.target.classList.contains('btn-la-quiero')) {
         let idProducto = parseInt(evento.target.closest('.card-producto').id)
         let producto = indumentariaOriginal.find(prod => prod.id === idProducto)
@@ -237,7 +240,7 @@ finalizarCompraBtn.addEventListener('click', () => {
         return
     }
     let resumenCompra = carrito.map(item =>
-        `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad} `
+        `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString('es-AR')} `
     )
     let totalCompra = calculoTotal()
     Swal.fire({
@@ -246,7 +249,7 @@ finalizarCompraBtn.addEventListener('click', () => {
     ${resumenCompra}
                 </div>
     <br><hr><br>
-        <strong>Total: $${totalCompra}</strong>
+        <strong>Total: $${totalCompra.toLocaleString('es-AR')}</strong>
         `,
         icon: 'info',
         showCancelButton: true,
@@ -318,12 +321,29 @@ const formularioFinCompra = () => {
     })
 }
 
+// Evento de los botones de filtro
+document.querySelectorAll('#filtro-tipo button').forEach(botonFiltro => {
+    botonFiltro.addEventListener('click', function () {
+        tipoSeleccionado = botonFiltro.value
+        filtrarProductos()
+        document.querySelectorAll('#filtro-tipo button').forEach(boton => boton.classList.remove('active'))
+        botonFiltro.classList.add('active')
+    })
+})
+
+// Filtrar productos orden y busqueda
 function filtrarProductos() {
     let busqueda = buscadorProductos.value.trim().toLowerCase()
+    let orden = ordenPrecio.value
 
     let productosFiltrados = indumentariaOriginal.filter(producto => {
-        return producto.nombre.toLowerCase().includes(busqueda)
+        let coincideTipo = tipoSeleccionado === '' || producto.tipo === tipoSeleccionado
+        let coincideBusqueda = producto.nombre.toLowerCase().includes(busqueda)
+        return coincideTipo && coincideBusqueda
     })
+
+    if (orden === 'asc') productosFiltrados.sort((a, b) => a.precio - b.precio)
+    if (orden === 'desc') productosFiltrados.sort((a, b) => b.precio - a.precio)
 
     mostrarProductos(productosFiltrados)
 }
@@ -348,6 +368,7 @@ document.addEventListener('click', (evento) => {
 })
 
 buscadorProductos.addEventListener('input', filtrarProductos)
+ordenPrecio.addEventListener('change', filtrarProductos)
 
 // Renderizar productos al cargar DOM
 document.addEventListener('DOMContentLoaded', () => {
