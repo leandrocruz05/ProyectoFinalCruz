@@ -111,7 +111,7 @@ body {
     cursor: pointer;
 }
 
-#carrito-icono span {
+#carrito-icono > span {
     position: absolute;
     top: 12px;
     right: 27px;
@@ -169,16 +169,14 @@ body {
 #carrito-items {
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
 }
 
 #carrito-items p {
     margin: 0;
 }
 
-#carrito-items button {
+#carrito-items > button {
     background-color: #dc3545;
     color: white;
     border: none;
@@ -189,10 +187,11 @@ body {
     align-self: center;
 }
 
-#carrito-items button:hover {
+#carrito-items > button:hover {
     background-color: #a71d2a;
 }
 
+/* ITEMS DEL CARRITO INTERNO */
 .carrito-modelo {
     background: #fff;
     border: 1px solid #e5eaf2;
@@ -200,7 +199,7 @@ body {
     padding: 10px 16px 8px 16px;
     margin-bottom: 12px;
     font-family: 'Montserrat', Arial, sans-serif;
-    color: #1a397d;
+    color: #db0101;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -212,29 +211,21 @@ body {
     justify-content: space-between;
     align-items: center;
     font-size: 0.99rem;
-    font-size: 0.92rem;
-    color: #4c6cb3;
     font-weight: 400;
 }
 
 .carrito-header .item-titulo {
     font-weight: 500;
     letter-spacing: 0.01em;
-    color: #1a397d;
+    color: #db0101;
 }
 
 .item-eliminar {
-    background: none;
     border: none;
     cursor: pointer;
     font-size: 1.15rem;
-    color: #4c6cb3;
     transition: color 0.18s;
     padding: 2px 4px;
-}
-
-.item-eliminar:hover {
-    color: #1a397d;
 }
 
 .carrito-info {
@@ -290,15 +281,14 @@ body {
     font-weight: 500;
     min-width: 18px;
     text-align: center;
-    color: #1a397d;
 }
 
 .item-precio {
     font-size: 1.06rem;
     font-weight: 700;
-    color: #1a397d;
     letter-spacing: 0.02em;
 }
+/* FIN CARRITO INTERNO */
 
 #carrito-total {
     font-size: 20px;
@@ -429,63 +419,6 @@ body {
     color: #222;
     transition: border-color 0.2s;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* ------------------------------- PRODUCTOS -------------------------------
@@ -739,22 +672,22 @@ body {
 }
 
 .card.zoom-bg.fondo-camisetas::before {
-    background-image: url('https://i.imgur.com/07yvLsM.jpeg');
+    background-image: url(../img/titulos/camisetas.jpg);
     /*Camisetas*/
 }
 
 .card.zoom-bg.fondo-entrenamiento::before {
-    background-image: url('https://i.imgur.com/eUWEq7r.jpeg');
+    background-image: url(../img/titulos/entrenamiento.jpg);
     /*Entrenamiento*/
 }
 
 .card.zoom-bg.fondo-buzos::before {
-    background-image: url('https://i.imgur.com/P8dlpC3.png');
+    background-image: url(../img/titulos/buzos.jpg);
     /*Buzos*/
 }
 
 .card.zoom-bg.fondo-deco::before {
-    background-image: url('https://i.imgur.com/XESqtuy.jpeg');
+    background-image: url(../img/titulos/deco.jpg);
     /*Accesorios*/
 }
 

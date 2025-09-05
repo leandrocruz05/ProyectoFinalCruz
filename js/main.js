@@ -27,14 +27,13 @@ const ocultarLoader = () => {
 const MostrarProductos = (productos = indumentaria) => {
     contenedorIndumentaria.innerHTML = ''
     productos.forEach((producto) => {
-        const productoEnCarrito = carrito.find(item => item.id === producto.id)
         contenedorIndumentaria.innerHTML += `
             <div class="card-producto" id=${producto.id}>
                 <img src="${producto.imagen}" alt="${producto.nombre}">
                 <div class="info-producto">
                     <h2>${producto.nombre}</h2>
                     <p>${producto.descripcion}</p>
-                    <span>$${producto.precio}</span>
+                    <span>$${producto.precio.toLocaleString('es-AR')}</span>
                     <button class="btn-la-quiero" data-id="${producto.id}">¡La quiero!</button>
                 </div>
             </div> 
@@ -114,10 +113,11 @@ const AgregarAlCarrito = () => {
 const modificarCantidad = () => {
     document.querySelectorAll('.boton-cantidad').forEach(boton => {
         boton.addEventListener('click', (evento) => {
+            evento.stopPropagation()
             let idprod = parseInt(evento.target.dataset.id)
             let accion = evento.target.dataset.accion
             let producto = carrito.find(item => item.id === idprod)
-            
+
             if (producto) {
                 switch (accion) {
                     case 'sumar':
@@ -154,7 +154,7 @@ const MostrarCarrito = () => {
             <div class="carrito-modelo">
                 <div class="carrito-header">
                     <span class="item-titulo">${item.nombre}</span>
-                    <button class="item-eliminar" data-id="${item.id}"></button>
+                    <button class="item-eliminar" data-id="${item.id}">🗑️</button>
                 </div>
                 <div class="carrito-info">
                     <div class="cantidad-carrito">
@@ -162,12 +162,12 @@ const MostrarCarrito = () => {
                         <span>${item.cantidad}</span>
                         <button class="boton-cantidad" data-id="${item.id}" data-accion="sumar">+</button>
                     </div>
-                    <span class="item-precio">$${(item.precio * item.cantidad)}</span>
+                    <span class="item-precio">$${(item.precio * item.cantidad).toLocaleString('es-AR')}</span>
                 </div>
             </div>
             `
     })
-    carritoTotal.innerHTML = `<p class="total"> Total: $${calculoTotal()}</p>`
+    carritoTotal.innerHTML = `<p class="total"> Total: $${calculoTotal().toLocaleString('es-AR')}</p>`
     EliminarDelCarrito()
     modificarCantidad()
 }
@@ -177,6 +177,7 @@ const EliminarDelCarrito = () => {
     const botonEliminar = document.querySelectorAll('.item-eliminar')
     botonEliminar.forEach((boton) => {
         boton.addEventListener('click', (evento) => {
+            evento.stopPropagation()
             let idProducto = parseInt(evento.target.dataset.id)
             carrito = carrito.filter(item => item.id !== idProducto)
             guardarCarrito()
