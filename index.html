@@ -53,22 +53,17 @@
     </div>
     <div class="navbar-bottom">
       <nav class="navbar-menu">
-        <ul>
-          <li><a href="#">
-              <h2>INICIO</h2>
-            </a></li>
-          <li><a href="#">
-              <h2>CAMISETAS</h2>
-            </a></li>
-          <li><a href="#">
-              <h2>ENTRENAMIENTO</h2>
-            </a></li>
-          <li><a href="#">
-              <h2>BUZOS</h2>
-            </a></li>
-          <li><a href="#">
-              <h2>ACCESORIOS</h2>
-            </a></li>
+        <ul id="filtro-tipo">
+          <button value="">TODOS</button>
+          <button value="camiseta">CAMISETAS</button>
+          <button value="entrenamiento">ENTRENAMIENTO</button>
+          <button value="buzo">BUZOS</button>
+          <button value="accesorios">ACCESORIOS</button>
+          <select id="orden-precio">
+            <option value="">Sin ordenar</option>
+            <option value="asc">Precio Menor &gt; Mayor</option>
+            <option value="desc">Precio Mayor &gt; Menor</option>
+          </select>
         </ul>
       </nav>
     </div>
